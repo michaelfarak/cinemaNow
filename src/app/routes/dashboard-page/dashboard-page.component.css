@@ -1,0 +1,28 @@
+.dashboard-btn {
+  margin: 15px;
+}
+
+.dashboard-title{
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #f5c518;
+  border-color: #f5c518;
+  color: black;
+  font-weight: bold;
+}
+
+::ng-deep .modal-content {
+  background: #151719;
+  color: #f5c518;
+}
+
+::ng-deep .modal-dialog {
+  margin-top: 17%;
+}
+
+.btn-modal-save {
+  border-color: #f5c518;
+  color: #f5c518;
+}

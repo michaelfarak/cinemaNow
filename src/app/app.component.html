@@ -1,0 +1,7 @@
+<div class="header d-flex justify-content-center">
+  <span *ngIf="router.url !== '/faq'" class="faq-link" style="color: #f5c518" [routerLink]="['/faq']">
+    FAQ
+  </span>
+  <span class="title">{{title}}</span>
+</div>
+<router-outlet></router-outlet>

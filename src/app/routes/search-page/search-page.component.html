@@ -1,0 +1,63 @@
+<app-toaster-container></app-toaster-container>
+<div *ngIf="isTheaterSet" class="searchbar-container">
+  <fieldset class="search-bar">
+    <div class="form-group">
+      <label class="search-label"  for="typeahead-http">Search for a movie to add:</label>
+      <input id="typeahead-http" type="text" class="form-control mx-sm-3" pattern="[a-zA-Z ]*" (selectItem)="clickedItem($event)"
+             [class.is-invalid]="searchFailed" [disabled]="!isTheaterSet" [(ngModel)]="model" [ngbTypeahead]="search" placeholder="TMDB search..." />
+      <small *ngIf="searching" class="form-text text-muted">searching...</small>
+      <div class="invalid-feedback" *ngIf="searchFailed" style="display: contents">Sorry, suggestions could not be loaded.</div>
+    </div>
+  </fieldset>
+</div>
+
+<div *ngIf="!isTheaterSet" class="theater-info-container">
+  <h3 style="color: #ffc107">Please start by entering information about your theater</h3>
+  <form [formGroup]="theaterSizeForm">
+    <div class="form-group">
+      <label>Theater Name: </label>
+      <input #nameInput  type="text" class="form-control" formControlName="name" placeholder="Type a name">
+    </div>
+    <div class="form-group">
+      <label>How many halls do you have: (1-30)</label>
+      <input #sizeInput type="number" min="1" max="30" formControlName="size" class="form-control" [value]="theaterHallSize" placeholder="Enter a number" name="sizeInput">
+    </div>
+    <button class="btn submit-btn" [disabled]="!theaterSizeForm.valid" style="margin-top: 30px" (click)="submitForm(nameInput.value, sizeInput.valueAsNumber)">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="theaterHallSize && selectedMovie" class="add-to-hall-container">
+  <div *ngIf="!selectedHall" ngbDropdown>
+    <button class="btn submit-btn dropdown-btn" ngbDropdownToggle>Select Hall</button>
+    <div ngbDropdownMenu >
+      <button ngbDropdownItem *ngFor="let hall of numSequence(theaterHallSize); let i = index;" (click)="selectHall(i+1)">Hall {{i+1}}</button>
+    </div>
+  </div>
+  <span *ngIf="selectedHall">Hall: {{selectedHall}}, </span>
+  <div *ngIf="!selectedTimeSlot && selectedHall" ngbDropdown>
+    <button class="btn submit-btn dropdown-btn" ngbDropdownToggle>Select Time</button>
+    <div ngbDropdownMenu >
+      <button ngbDropdownItem *ngFor="let time of timeSlots;" (click)="selectTimeSlot(time)">{{time}}</button>
+    </div>
+  </div>
+  <span *ngIf="selectedTimeSlot">Time: {{selectedTimeSlot}}</span>
+</div>
+
+<button *ngIf="selectedHall && selectedTimeSlot" class="add-movie-button btn submit-btn m-5"
+        (click)="clickAddMovie(selectedMovie, selectedHall, selectedTimeSlot)">Add movie to Hall {{selectedHall}} at {{selectedTimeSlot}}  </button>
+
+<button *ngIf="movieAdded" class="btn submit-btn dashboard-btn" [routerLink]="['/dashboard']">Go to Dashboard</button>
+
+<div *ngIf="selectedMovieData" class="movie-data-container">
+  <span class="info-label" style="color: #f5c518;">Information about the movie</span>
+  <div>{{selectedMovieData.title}}</div>
+  <img src="http://image.tmdb.org/t/p/w300/{{selectedMovieData.poster_path}}">
+  <div>
+    <span class="info-label">Released date: </span>
+    <span>{{selectedMovieData.release_date | date}}</span>
+  </div>
+  <div>
+    <span class="info-label">Synopsis: </span>
+    <p>{{selectedMovieData.overview}}</p>
+  </div>
+</div>

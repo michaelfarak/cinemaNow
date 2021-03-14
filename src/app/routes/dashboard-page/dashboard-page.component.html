@@ -1,0 +1,69 @@
+<app-toaster-container></app-toaster-container>
+<button class="btn submit-btn dashboard-btn" [routerLink]="['/search']">Return to search page</button>
+<h1 class="dashboard-title">Current {{theaterObj.name}} Dashboard</h1>
+
+
+<table *ngIf="movieList" class="table table-striped">
+  <thead>
+  <tr style="color: #f5c518">
+    <th></th>
+    <th scope="col">Halls</th>
+    <th scope="col">Movies</th>
+    <th scope="col">Time</th>
+  </tr>
+  </thead>
+
+  <tbody style="color: white">
+
+  <ng-container *ngFor="let element of movieList">
+    <tr>
+      <td></td>
+      <td >{{element.hallObj.hallNumber}}</td>
+      <td >{{element.title}}</td>
+      <td>{{element.hallObj.timeSlot}}</td>
+      <td>
+        <button class="btn btn-success" style="color: black" (click)="openEditModal(editModal, element)">
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+      <td >
+        <button class="btn btn-danger" style="color: black" (click)="deleteEntry(element._id)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-container>
+
+  </tbody>
+
+</table>
+
+<ng-template #editModal let-modal style="background: #151719; color: #f5c518;">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{modalContent.title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group d-flex justify-content-around">
+          <div ngbDropdown>
+            <button class="btn submit-btn" ngbDropdownToggle>Hall {{modalContent.hallObj.hallNumber}}</button>
+            <div ngbDropdownMenu >
+              <button ngbDropdownItem *ngFor="let hall of numSequence(theaterObj.size); let i = index;" (click)="selectHall(i+1)">Hall {{i+1}}</button>
+            </div>
+          </div>
+          <div ngbDropdown>
+            <button class="btn submit-btn" ngbDropdownToggle>{{modalContent.hallObj.timeSlot}}</button>
+            <div ngbDropdownMenu >
+              <button ngbDropdownItem *ngFor="let time of timeSlots;" (click)="selectTimeSlot(time)">{{time}}</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-modal-save" (click)="saveUpdatedData()">Save</button>
+    </div>
+</ng-template>

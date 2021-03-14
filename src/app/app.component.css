@@ -1,0 +1,22 @@
+.header {
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  background-color: #1f212a;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 40px;
+  padding: 0 5px;
+  background-color: #f5c518;
+  border-radius: 7px;
+  color: black;
+}
+
+.faq-link {
+  cursor: pointer;
+  color: #f5c518;
+  position: absolute;
+  left: 35px;
+}

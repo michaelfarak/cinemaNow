@@ -1,0 +1,14 @@
+.faq-page {
+  width: 50vw;
+  margin: 80px auto;
+}
+
+.submit-btn {
+  background-color: #f5c518;
+  border-color: #f5c518;
+  color: black;
+  font-weight: bold;
+}
+.separator {
+  border-color: #f8f9fa24;
+}

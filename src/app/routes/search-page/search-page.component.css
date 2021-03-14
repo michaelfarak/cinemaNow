@@ -1,0 +1,68 @@
+.searchbar-container {
+  width: 50vw;
+  margin: 50px auto 0 auto;
+  text-align: center;
+}
+
+#typeahead-http {
+  margin-left: 0!important;
+}
+
+.search-label{
+  font-size: 25px;
+}
+
+.movie-data-container {
+  text-align: center;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.theater-info-container {
+  text-align: center;
+  padding: 50px;
+  border: 2px dashed #ffc107;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  border-radius: 20px;
+}
+
+.submit-btn {
+  background-color: #f5c518;
+  border-color: #f5c518;
+  color: black;
+  font-weight: bold;
+}
+
+
+.form-group {
+  text-align: left;
+}
+.add-to-hall-container {
+  position: absolute;
+  left: 15vw;
+  top: 40vh;
+}
+
+.dropdown-btn {
+  padding: 25px;
+}
+
+.add-movie-button {
+  padding: 30px;
+  position: absolute;
+  left: 9vw;
+  top: 40vh;
+}
+
+.dashboard-btn {
+  position: absolute;
+  right: 9vw;
+  top: 45vh;
+  padding: 40px;
+}
+
